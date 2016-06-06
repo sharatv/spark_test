@@ -6,7 +6,9 @@ sparkConf = new SparkConf().setAppName(Constants.APP_NAME)
                         .set("spark.executor.extraJavaOptions", "-XX:+UseG1GC");
             
             ctx= new JavaSparkContext(sparkConf);
-            fileRDD.count();
+                        JavaRDD<Object1> FileDataJavaRDD = batchDao.readFile(javaSparkCtx, FilePath);
+
+            FileDataJavaRDD.count();
 }
 
 

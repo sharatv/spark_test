@@ -1,0 +1,31 @@
+public static void main(String[] args){
+sparkConf = new SparkConf().setAppName(Constants.APP_NAME)
+                        .set("spark.io.compression.codec", "lzf")
+                        .set("spark.speculation", "true")
+                        .set("spark.cleaner.ttl", "10000")
+                        .set("spark.executor.extraJavaOptions", "-XX:+UseG1GC");
+            
+            ctx= new JavaSparkContext(sparkConf);
+            fileRDD.count();
+}
+
+
+public static JavaRDD<Object1> fileRDD (JavaSparkContext ctx, String filePath) {
+        return ctx.textFile(FilePath,Constants.OVERRIDE_NUM_PARTITIONS).mapPartitions(new FlatMapFunction<Iterator<String>, Object1>() {
+            @Override
+            public Iterable<Object1> call(Iterator<String> stringIterator) throws Exception {
+                final Object1 currentDayFile = new Object1();
+                List<Object1> list = new ArrayList<Object1>();
+                while (stringIterator.hasNext()) {
+                   String line = stringIterator.next();
+                   String[] parts = line.split("\u0001", -1);
+                    currentDayFile.setSorId(parts[1]);
+                   ..................few setters
+                    list.add(currentDayFile);
+                return list;
+            }
+
+                return list;
+            }
+        });
+    }
